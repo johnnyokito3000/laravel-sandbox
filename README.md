@@ -1,105 +1,38 @@
-# Laravel 10x Sandbox Project
+0. **Create a .env file**
+```
+cp .env.docker .env
+```
+1. **Build the project**
+```
+docker-compose up --build -d
+```
+2. **Install the Laravel APP (inside the sandbox_app container)**
+```
+install-app
+```
+3. **Populate the users table with random data using the DB seeder**
+```
+php artisan migrate
+php artisan db:seed --class=DatabaseSeeder
+```
+4. **Create the ProfilePicture model with migration and seeder; also created a one-to-one relationship with the user model**
+```
+php artisan make:model ProfilePicture -ms
+```
 
-Welcome to the Laravel 10x Sandbox project! This repository serves as a test environment for different purposes. The project is containerized using Docker to ensure a smooth and consistent setup across different machines. Below are the instructions to set up and run the project.
+   - create some random profile_pictures records in the seeder
+	- php artisan db:seed --class=ProfilePictureSeeder (populate the profile_pictures table)
 
-## Prerequisites
+5. **Create the profile_pictures table in the DB**
+```
+php artisan migrate
+```
+6. **Create the ProfileController**
+```
+php artisan make:controller ProfileController
+```
 
-1. [Docker](https://www.docker.com/get-started) - Ensure Docker is installed on your machine.
-2. [Docker Compose](https://docs.docker.com/compose/install/) - Docker Compose is used to define and manage multi-container Docker applications.
-
-## Setup & Installation
-
-1. **Clone the Repository**
-
-   Start by cloning the repository to your local machine:
-
-   ```
-   git clone https://github.com/Elentra-Training/laravel-sandbox.git laravel-sandbox
-   cd laravel-sandbox
-   ```
-
-2. **Start Docker Containers**
-
-   Use Docker Compose to build and start the services:
-
-   ```
-   docker-compose up --build -d
-   ```
-
-   This command will:
-
-    - `--build`: Build the images if necessary.
-    - `-d`: Run the containers in detached mode (in the background).
-
-3. **Setup Laravel Environment**
-
-   After the Docker containers are up, copy the `.env.example` to `.env`:
-
-   ```
-   cp .env.docker .env
-   ```
-
-    Then go into the `sandbox_app` container and execute the installation command.
-
-   ```
-   docker exec -it sandbox_app bash
-   ```
-
-   This command will install all composer dependencies, generate the application key and run migrations.
-
-   ```
-   install-app
-   ```
-
-4. **Setup Hosts Enviroment**
-
-   Add the following line to your `/etc/hosts` file:
-
-   ```
-   127.0.0.200     laravel-sandbox.com
-   ```
-
-   You can change the IP address to whatever you want with the following env var.
-
-   ```properties
-   WEB_HOSTNAME=127.0.0.200 
-   ```
-
-5. **Access the Application**
-
-   With the containers running, you should be able to access the Laravel application via your browser:
-
-   ```
-   laravel-sandbox.com
-   ```
-
-## Usage
-
-Once you've set up the project, you can create features for the project.
-
-## Troubleshooting
-
-If you encounter any issues while setting up or running the project:
-
-1. Check Docker logs for any evident issues:
-
-   ```
-   docker-compose logs
-   ```
-
-2. Ensure all Docker services are running:
-
-   ```
-   docker-compose ps
-   ```
-   
-3. Change any of the following environment variables in the `.env` file if you're experiencing conflicts with ips or ports:
-
-   ```properties
-    WEB_HOSTNAME=127.0.0.200
-    IPV4_NETWORK=173.25.2
-    REDIS_PORT=6380
-    DATABASE_HOST_PORT=3307
-   ```
-
-The above values are intended to avoid conflicts with other services running on your machine. You can change them to whatever you want.
+   - create an API route for this controller
+   - retrieve user including profile picture url with a left join SQL (left join so that it doesn't exclude users with no profile picture)
+   - return the user in a JSON format taking care of whether or not the user id corresponds to an existing user or not
+7. **Test with Postman - created a Postman collection with 2 GET requests: (1) existing user (2) non existing user**

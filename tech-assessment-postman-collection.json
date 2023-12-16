@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "54734d4f-46e8-4a04-910a-9b6525dfc895",
+		"name": "Elentra Technical Assessment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4499922"
+	},
+	"item": [
+		{
+			"name": "Retrieve existing user profile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "laravel-sandbox.com:9000/api/user-profile/3",
+					"host": [
+						"laravel-sandbox",
+						"com"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"user-profile",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve non existing user profile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "laravel-sandbox.com:9000/api/user-profile/15",
+					"host": [
+						"laravel-sandbox",
+						"com"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"user-profile",
+						"15"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
