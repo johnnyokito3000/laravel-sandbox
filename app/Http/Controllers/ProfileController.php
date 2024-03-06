@@ -9,7 +9,7 @@ class ProfileController extends Controller
 {
     public function index($id) {
 
-        // Testing workflow (sync develop)
+        // Testing workflow (sync develop blablablabla)
         $user = DB::table('users')
                     ->leftJoin('profile_pictures', 'users.id', '=', 'profile_pictures.user_id')
                     ->select('users.name', 'users.email', 'profile_pictures.url')
