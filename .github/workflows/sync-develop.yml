@@ -22,8 +22,8 @@ jobs:
 
       - name: Create develop branch if it doesn't exist
         run: |
-          git fetch origin master
-          git checkout -B develop origin/master
+          git fetch origin main
+          git checkout -B develop origin/main
 
       - name: Force-push changes to develop branch
         run: |
