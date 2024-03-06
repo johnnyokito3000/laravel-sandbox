@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 class ProfileController extends Controller
 {
     public function index($id) {
+        // From main to develop through github workflow
 
         // Testing workflow (sync develop YYYYYYY)
         $user = DB::table('users')
