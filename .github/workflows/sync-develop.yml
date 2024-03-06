@@ -1,0 +1,30 @@
+name: Sync Develop with Master
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch: # Enable manual triggering
+
+jobs:
+  sync-develop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: 'refs/heads/master' # Explicitly checkout master branch
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Create develop branch if it doesn't exist
+        run: |
+          git fetch origin master
+          git checkout -B develop origin/master
+
+      - name: Force-push changes to develop branch
+        run: |
+          git push --force origin develop
