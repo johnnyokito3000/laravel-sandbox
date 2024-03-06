@@ -1,9 +1,9 @@
-name: Sync Develop with Master
+name: Sync Develop with Main
 
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch: # Enable manual triggering
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          ref: 'refs/heads/master' # Explicitly checkout master branch
+          ref: 'refs/heads/main' # Explicitly checkout main branch
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -22,8 +22,8 @@ jobs:
 
       - name: Create develop branch if it doesn't exist
         run: |
-          git fetch origin master
-          git checkout -B develop origin/master
+          git fetch origin main
+          git checkout -B develop origin/main
 
       - name: Force-push changes to develop branch
         run: |
