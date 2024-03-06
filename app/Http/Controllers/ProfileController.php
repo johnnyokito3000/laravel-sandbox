@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 class ProfileController extends Controller
 {
     public function index($id) {
+        
 
         $user = DB::table('users')
                     ->leftJoin('profile_pictures', 'users.id', '=', 'profile_pictures.user_id')
