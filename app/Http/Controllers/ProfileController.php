@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\DB;
 class ProfileController extends Controller
 {
     public function index($id) {
-        // From main to develop through github workflow
 
-        // Testing workflow (sync develop YYYYYYY)
         $user = DB::table('users')
                     ->leftJoin('profile_pictures', 'users.id', '=', 'profile_pictures.user_id')
                     ->select('users.name', 'users.email', 'profile_pictures.url')
